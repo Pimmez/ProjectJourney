@@ -23,7 +23,12 @@ public class Player : MonoBehaviour
 	private void TakeDamage(float damageAmount)
 	{
 		health -= damageAmount;
+		if(health >= 0)
+		{
+			Destroy(this.gameObject);
+		}
 	}
+
 
 	private void OnEnable()
 	{
