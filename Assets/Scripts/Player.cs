@@ -1,24 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using System; 
 
 public class Player : MonoBehaviour
 {
+	public static Action<int> OnTreeAttackEvent;
 	private float maxHealth = 100f;
+	public Animator anim;
 
 	[SerializeField] private float health;
 
-    // Start is called before the first frame update
-    private void Awake()
+	private void Awake()
     {
+		anim = GetComponentInChildren<Animator>();
 		health = maxHealth;
-    }
-
-    // Update is called once per frame
-	private void Update()
-    {
-    
-    }
+	}
 
 	private void TakeDamage(float damageAmount)
 	{
@@ -29,6 +27,13 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	public void AttackHit_AnimationEvent()
+	{	
+		if(OnTreeAttackEvent != null)
+		{
+			OnTreeAttackEvent(1);
+		}
+	}
 
 	private void OnEnable()
 	{
